@@ -20,9 +20,9 @@
 	</form>
 	<table style = "background: #AAFFAA;">
 		<tr>
-			<th style = "width: 80px;">
+			<th style = "width: 100px;">
 				<form>
-					<input type = "button" id = "rankSort" value = "Rank" style = "height : 25px; width : 80px;" />
+					<input type = "button" id = "rankSort" value = "Rank (ASC)" style = "height : 25px; width : 95px;" />
 				</form>
 			</th>
 			<th style = "width: 300px;">Country</th>

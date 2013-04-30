@@ -8,17 +8,18 @@ function urbanConcentrationList() {
 	var click = false;
 	var mouseRelative = 0;
 	var order = true;
-	$('#UrbanConTable') . attr('unselectable', 'on') . css('UserSelect', 'none') . css('MozUserSelect', 'none') ; /*unable selection*/
 	
 	/*make the urban concentration list reversed in table*/
 	var reverseRank = function() {
 		$('#rankSort') . click(function() {
-			obj.reverse() ;
+			obj["data"].reverse() ;
 			listDataSet() ;
 			if(order) {
+				$('#rankSort') . val("Rank(DESC)") ;
 				order = false;
 			}
 			else {
+				$('#rankSort') . val("Rank(ASC)") ;
 				order = true;
 			}
 		}) ;
@@ -26,15 +27,15 @@ function urbanConcentrationList() {
 	
 	/*use jquery to write list in table and option selection form in html*/
 	var listDataSet = function() {
-		$('.dataset') .remove() ;
-		for(var key	in obj) {
-			$('#UrbanConTable') . css('top', '-1px') ;
-			$('#UrbanConTable') . append("<tr class = \"dataset\"><td style = \"width: 40px; text-align: center;\">" + obj[key][0] + "</td><td style = \"width: 260px; text-align: center;\">" + obj[key][1] + "</td><td style = \"width: 120px;\">" + obj[key][2] + "</td><td style = \"width: 120px;\">" + obj[key][3] + "</td><td style = \"width: 120px;\">" + obj[key][4] + "</td></tr>") ;
-			$('#countries') . append("<option class = \"dataset\" value=\"" + obj[key][1] +"\">" + obj[key][1] + "</option>") ;
+		$('#UrbanConTable') . stop() ;
+		$('.dataset') . remove() ;
+		for(var key	in obj["data"]) {
+			$('#UrbanConTable') . append("<tr class = \"dataset\"><td style = \"width: 60px; text-align: center;\">" + obj["data"][key][0] + "</td><td style = \"width: 260px; text-align: center;\">" + obj["data"][key][1] + "</td><td style = \"width: 120px;\">" + obj["data"][key][2] + "</td><td style = \"width: 120px;\">" + obj["data"][key][3] + "</td><td style = \"width: 120px;\">" + obj["data"][key][4] + "</td></tr>") ;
 		}
 		for(var i = 0; i < 19; i++) {
-			$('#UrbanConTable') . append("<tr class = \"dataset\"><td style = \"width: 40px; text-align: center;\"></td><td style = \"width: 260px; text-align: center;\"></td><td style = \"width: 120px;\"></td><td style = \"width: 120px;\"></td><td style = \"width: 120px;\"></td></tr>") ;
+			$('#UrbanConTable') . append("<tr class = \"dataset\"><td style = \"width: 60px; text-align: center;\"></td><td style = \"width: 260px; text-align: center;\"></td><td style = \"width: 120px;\"></td><td style = \"width: 120px;\"></td><td style = \"width: 120px;\"></td></tr>") ;
 		}
+		$('#UrbanConTable') . css('top', '-1px') ;
 	}
 	
 	/*enable mouse to drag and browse the table*/
@@ -91,6 +92,10 @@ function urbanConcentrationList() {
 	
 	/*run this object*/
 	this . Execute = function() {
+		$('#UrbanConTable') . attr('unselectable', 'on') . css('UserSelect', 'none') . css('MozUserSelect', 'none') ; /*unable selection*/
+		for(var key	in obj["country"]) {
+			$('#countries') . append("<option value=\"" + obj["country"][key] +"\">" + obj["country"][key] + "</option>") ;
+		}
 		listDataSet() ;
 		reverseRank() ;
 		mouseDrag() ;
